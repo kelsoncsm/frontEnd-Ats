@@ -1,0 +1,25 @@
+
+
+<po-page-default  p-title="Cadastro de Candidatos" >
+  Cadastro Candidatos
+
+
+
+  <po-dynamic-form
+  #dynamicForm
+  p-auto-focus="name"
+  [p-fields]="fields"
+  p-value="any"
+  [p-validate-fields]="validateFields"
+  [p-value]="candidato" >
+</po-dynamic-form>
+
+<div class="po-row">
+  <po-button
+    class="po-md-3"
+    p-label="Save"
+    (p-click)="save(dynamicForm.form);poNotification.success('Data saved successfully!'); dynamicForm.form.reset()"
+  >
+  </po-button>
+</div>
+</po-page-default>
