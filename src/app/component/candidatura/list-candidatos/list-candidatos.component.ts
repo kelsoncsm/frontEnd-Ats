@@ -2,17 +2,19 @@ import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PoPageAction, PoTableColumn } from '@po-ui/ng-components';
-import { CandidatoModel } from 'src/app/model/candidatoModel';
+
+import { CandidaturaModel } from 'src/app/model/candidaturaModel';
 import { CandidatoService } from 'src/app/services/candidato.services';
+import { CandidadaturaService } from 'src/app/services/candidatura.services';
 
 @Component({
   selector: 'app-list-candidatos',
   templateUrl: './list-candidatos.component.html',
   styleUrls: ['./list-candidatos.component.css'],
 })
-export class ListCandidatosComponent implements OnInit {
+export class ListCandidaturaComponent implements OnInit {
   pageActions: Array<PoPageAction> = [];
-  itens: Array<CandidatoModel> = [];
+  itens: Array<CandidaturaModel> = [];
   colums: Array<PoTableColumn> = [
     { property: '', label: 'Info', type:'cellTemplate' },
     { property: 'id', label: 'Id', visible:false},
@@ -29,13 +31,12 @@ export class ListCandidatosComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private candidaoService: CandidatoService
+    private candidadaturaService: CandidadaturaService
   ) {
-    this.pageActions = this.createPageAction();
   }
 
   ngOnInit() {
-    this.candidaoService.getListaCandidato().subscribe((data) => {
+    this.candidadaturaService.getLista().subscribe((data) => {
 
       console.log(data);
       data.forEach(element => {
@@ -46,23 +47,6 @@ export class ListCandidatosComponent implements OnInit {
     });
   }
 
-  private createPageAction(): Array<PoPageAction> {
-    const action: Array<PoPageAction> = [];
 
-    action.push({
-      label: 'Novo',
-      action: () => this.router.navigate(['candidatos-form/0']),
-    });
-
-    return action;
-  }
-
-  removeItem(model:any){
-
-    this.candidaoService.delete(model).subscribe((data) => {
-     window.location.reload();
-    });
-
-  }
 
 }

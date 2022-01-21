@@ -11,6 +11,7 @@ import {
   PoPageAction
 } from '@po-ui/ng-components';
 import { CandidatoModel } from 'src/app/model/candidatoModel';
+import { Util } from 'src/app/Util/util';
 
 @Component({
   selector: 'app-form-candidatos',
@@ -30,7 +31,10 @@ export class FormCandidatosComponent implements OnInit {
     const id  = this.route.snapshot.paramMap.get('id');
 
     this.candidatoService.readById(id).subscribe(data => {
+
+      data.dataCadastro = Util.FormataData(data.dataCadastro);
       this.candidato = data
+
     });
   }
 
@@ -80,7 +84,7 @@ export class FormCandidatosComponent implements OnInit {
       property: 'dataNascimento',
       label: 'Data Nascimento',
       type: 'date',
-      format: 'dd/mm/yyyy',
+      format: 'dd/MM/YYYY',
       gridColumns: 2,
       gridSmColumns: 12,
       minValue: '1000-30-01',

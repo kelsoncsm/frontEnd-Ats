@@ -1,4 +1,31 @@
 
-<po-page-default [p-actions]="pageActions" p-title="Cadastro de Vagas" >
+
+<po-page-default  p-title="Cadastro de Vagas" >
   Cadastro Vagas
+
+
+
+  <po-dynamic-form
+  #dynamicForm
+  p-auto-focus="name"
+  [p-fields]="fields"
+  p-value="any"
+  [p-validate-fields]="validateFields"
+  [p-value]="vaga" >
+</po-dynamic-form>
+
+<div class="po-row">
+  <po-button
+    class="po-md-2"
+    p-label="Save"
+    (p-click)="save(dynamicForm.form);poNotification.success('Data saved successfully!'); dynamicForm.form.reset()"
+  >
+  </po-button>
+  <po-button
+  class="po-md-2 "
+  p-label="Cancel"
+  (p-click)="cancel()"
+>
+</po-button>
+</div>
 </po-page-default>

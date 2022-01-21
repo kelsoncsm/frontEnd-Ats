@@ -1,14 +1,15 @@
+import { VagaModel } from 'src/app/model/vagaModel';
 import { environment } from './../../environments/environment';
 
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { VagaModel } from '../model/vagaModel';
 
 @Injectable({
   providedIn: "root",
 })
 export class VagaService {
+
 
 
   baseUrl = environment.url;
@@ -18,8 +19,35 @@ export class VagaService {
 
   constructor(private http: HttpClient) { }
 
-  getListaVaga(): Observable<VagaModel[]> {
-    return this.http.get<VagaModel[]>( this.baseUrl +'/Vaga');
+  getListaCandidato(): Observable<VagaModel[]> {
+    return this.http.get<VagaModel[]>(`${this.baseUrl}/Vaga`);
   }
+
+
+  readById(id: string | null): Observable<VagaModel> {
+    const url = `${this.baseUrl}/Vaga/${id}`;
+    return this.http.get<VagaModel>(url);
+  }
+
+  update(model: VagaModel): Observable<VagaModel> {
+
+    return this.http.put<VagaModel>(`${this.baseUrl}/Vaga`, model,this.httpOptions);
+
+  }
+
+  save(model: VagaModel): Observable<VagaModel> {
+
+    return this.http.post<VagaModel>(`${this.baseUrl}/Vaga`, model,this.httpOptions);
+
+  }
+
+
+  delete(model: any): Observable<VagaModel> {
+
+    return this.http.post<VagaModel>(`${this.baseUrl}/Vaga/Delete`, model);
+  }
+
+
+
 
 }

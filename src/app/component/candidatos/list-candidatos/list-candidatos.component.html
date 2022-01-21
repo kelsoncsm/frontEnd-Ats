@@ -1,16 +1,12 @@
 
 
 <po-page-default [p-actions]="pageActions" p-title="Lista de Candidatos" >
-  Lista Candidatos
 
   <po-table [p-items]="itens" [p-columns]="colums" [p-sort]="true" [p-striped]="true"  [p-hide-columns-manager]="true">
 
     <ng-template p-table-cell-template let-column="column" let-row="row">
-      <!-- <span #target style="color: #2c038a;" class="po-clickable po-icon po-icon-download" (click)="edit(row)"></span> -->
-      <po-button p-label="edit" routerLink="/candidatos-form/{{row.id}}"> </po-button>
-      <po-button p-label="delete" (p-click)="removeItem(row)"> </po-button>
-
-
+      <po-button style="margin: 0 4px;" p-label="edit" routerLink="/candidatos-form/{{row.id}}"> </po-button>
+      <po-button style="margin: 0 4px;" p-label="delete" (p-click)="removeItem(row)"> </po-button>
     </ng-template>
   </po-table>
 </po-page-default>

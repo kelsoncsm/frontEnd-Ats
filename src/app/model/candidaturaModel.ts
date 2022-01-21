@@ -1,6 +1,6 @@
 
 
-export class VagaModel {
+export class CandidaturaModel {
   id?: string;
   descricao ?: string;
   requisitos ?: string;

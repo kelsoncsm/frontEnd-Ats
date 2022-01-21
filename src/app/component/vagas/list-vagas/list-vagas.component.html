@@ -1,10 +1,15 @@
 
 
 <po-page-default [p-actions]="pageActions" p-title="Lista de Vagas" >
-  Lista Vagas
 
-  <po-table [p-items]="itens" [p-columns]="colums" [p-sort]="true" [p-striped]="true"   [p-hide-columns-manager]="true">
 
+  <po-table [p-items]="itens" [p-columns]="colums" [p-sort]="true" [p-striped]="true"  [p-hide-columns-manager]="true">
+
+    <ng-template p-table-cell-template let-column="column" let-row="row">
+      <po-button style="margin: 0 4px;" p-label="edit" routerLink="/vagas-form/{{row.id}}"> </po-button>
+      <po-button style="margin: 0 4px;" p-label="delete" (p-click)="removeItem(row)"> </po-button>
+
+
+    </ng-template>
   </po-table>
-
 </po-page-default>

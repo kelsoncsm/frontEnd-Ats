@@ -13,6 +13,7 @@ import { PoTemplatesModule } from '@po-ui/ng-templates';
 import { CommonModule } from '@angular/common';
 import { ListCandidatosComponent } from './component/candidatos/list-candidatos/list-candidatos.component';
 import { FormCandidatosComponent } from './component/candidatos/form-candidatos/form-candidatos.component';
+import { ListCandidaturaComponent } from './component/candidatura/list-candidatos/list-candidatos.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { FormCandidatosComponent } from './component/candidatos/form-candidatos/
     FormVagasComponent,
     HomeComponent,
     ListCandidatosComponent,
-    FormCandidatosComponent
+    FormCandidatosComponent,
+    ListCandidaturaComponent
 
   ],
   imports: [
