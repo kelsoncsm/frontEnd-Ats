@@ -2,12 +2,9 @@
 
 export class CandidaturaModel {
   id?: string;
+  nome ?: string;
   descricao ?: string;
-  requisitos ?: string;
   dataInicio ?: Date;
   dataFim ?: Date;
-  isAtivo?: boolean;
-  statusDescricao ?: string;
-
 
 }

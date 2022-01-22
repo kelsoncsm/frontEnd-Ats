@@ -17,8 +17,8 @@ export class SideBarComponent  {
 
   readonly menus: Array<PoMenuItem> = [
     { label: 'Home', action:() => this.router.navigate(['home']) },
-    { label: 'Candidatos', action:() => this.router.navigate(['candidatos-list']) },
     { label: 'Vagas', action:() => this.router.navigate(['vagas-list']) },
+    { label: 'Candidatos', action:() => this.router.navigate(['candidatos-list']) },
     { label: 'Candidaturas', action:() => this.router.navigate(['candidatura-list']) },
   ];
 
