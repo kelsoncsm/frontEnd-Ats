@@ -28,5 +28,24 @@ export class CandidadaturaService {
   }
 
 
+  getListaVagasCandidatos(id: string | null): Observable<CandidaturaModel[]> {
+    const url = `${this.baseUrl}/Candidatura/GetListaVagasAtivas/${id}`;
+    return this.http.get<CandidaturaModel[]>(url);
+  }
+
+
+  update(model: CandidaturaModel): Observable<CandidaturaModel> {
+
+    return this.http.put<CandidaturaModel>(`${this.baseUrl}/Candidatura`, model,this.httpOptions);
+
+  }
+
+
+  save(model: CandidaturaModel): Observable<CandidaturaModel> {
+
+    return this.http.post<CandidaturaModel>(`${this.baseUrl}/Candidatura`, model,this.httpOptions);
+
+  }
+
 
 }

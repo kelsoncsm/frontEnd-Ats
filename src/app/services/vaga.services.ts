@@ -19,7 +19,7 @@ export class VagaService {
 
   constructor(private http: HttpClient) { }
 
-  getListaCandidato(): Observable<VagaModel[]> {
+  getListaVagas(): Observable<VagaModel[]> {
     return this.http.get<VagaModel[]>(`${this.baseUrl}/Vaga`);
   }
 
@@ -28,6 +28,8 @@ export class VagaService {
     const url = `${this.baseUrl}/Vaga/${id}`;
     return this.http.get<VagaModel>(url);
   }
+
+
 
   update(model: VagaModel): Observable<VagaModel> {
 

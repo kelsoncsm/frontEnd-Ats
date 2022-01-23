@@ -43,7 +43,7 @@ export class CandidatoService {
 
   delete(model: any): Observable<CandidatoModel> {
 
-    return this.http.post<CandidatoModel>(`${this.baseUrl}/Candidato/Delete`, model);
+    return this.http.post<CandidatoModel>(`${this.baseUrl}/Candidatura/Delete`, model);
   }
   // remove(model: CandidatoModel): Observable<CandidatoModel> {
 

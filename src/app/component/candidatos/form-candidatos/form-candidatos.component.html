@@ -1,4 +1,4 @@
-
+<!--
 
 <po-page-default  p-title="Cadastro de Candidatos" >
   Cadastro Candidatos
@@ -22,4 +22,59 @@
   >
   </po-button>
 </div>
-</po-page-default>
+</po-page-default> -->
+
+
+<po-tabs>
+  <po-tab p-label="Dados" [p-active]="true">
+
+    <po-page-default  p-title="Cadastro de Candidatos" >
+      Cadastro Candidatos
+      <po-dynamic-form
+      #dynamicForm
+      p-auto-focus="name"
+      [p-fields]="fields"
+      p-value="any"
+      [p-validate-fields]="validateFields"
+      [p-value]="candidato" >
+    </po-dynamic-form>
+
+    <div class="po-row">
+      <po-button
+        class="po-md-3"
+        p-label="Save"
+        (p-click)="save(dynamicForm.form);poNotification.success('Data saved successfully!'); dynamicForm.form.reset()"
+      >
+      </po-button>
+    </div>
+    </po-page-default>
+
+  </po-tab>
+  <po-tab p-label="Vagas" [p-active]="!habilitaVagas" >
+
+    <po-page-default   >
+      Candidaturas Ativas
+      <po-table [p-items]="candidaturasAtivas" [p-columns]="colums" [p-sort]="true" [p-striped]="true"  [p-hide-columns-manager]="true">
+
+        <ng-template p-table-cell-template let-column="column" let-row="row">
+          <po-button style="margin: 0 4px;" p-label="add" (p-click)="addCandidatura(row)"> </po-button>
+
+        </ng-template>
+      </po-table>
+
+    <br/>
+    <br/>
+     Minhas Candidaturas
+      <po-table [p-items]="candidaturasMinhas" [p-columns]="colums" [p-sort]="true" [p-striped]="true"  [p-hide-columns-manager]="true">
+
+        <ng-template p-table-cell-template let-column="column" let-row="row">
+          <po-button style="margin: 0 4px;" p-label="remover" (p-click)="removeCandidatura(row)"> </po-button>
+
+        </ng-template>
+      </po-table>
+    </po-page-default>
+
+  </po-tab>
+
+
+</po-tabs>

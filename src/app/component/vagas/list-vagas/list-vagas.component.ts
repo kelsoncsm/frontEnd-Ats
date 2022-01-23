@@ -32,7 +32,7 @@ export class ListVagasComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.vagaService.getListaCandidato().subscribe((data) => {
+    this.vagaService.getListaVagas().subscribe((data) => {
 
       console.log(data);
       data.forEach(element => {

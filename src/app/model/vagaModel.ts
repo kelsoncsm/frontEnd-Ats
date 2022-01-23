@@ -8,6 +8,7 @@ export class VagaModel {
   dataFim ?: Date;
   isAtivo?: boolean;
   statusDescricao ?: string;
+  idCandidato?: string;
 
 
 }

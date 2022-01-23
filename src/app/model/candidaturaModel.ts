@@ -6,5 +6,7 @@ export class CandidaturaModel {
   descricao ?: string;
   dataInicio ?: Date;
   dataFim ?: Date;
+  requisitos ?: string;
+
 
 }
