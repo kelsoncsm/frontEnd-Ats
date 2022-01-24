@@ -50,11 +50,11 @@
     </po-page-default>
 
   </po-tab>
-  <po-tab p-label="Vagas" [p-active]="!habilitaVagas" >
+  <po-tab p-label="Vagas" [p-disabled] ="!habilitaVagas"  >
 
     <po-page-default   >
-      Candidaturas Ativas
-      <po-table [p-items]="candidaturasAtivas" [p-columns]="colums" [p-sort]="true" [p-striped]="true"  [p-hide-columns-manager]="true">
+      Vagas Ativas
+      <po-table [p-items]="candidaturasAtivas" [p-columns]="columsVaga" [p-sort]="true" [p-striped]="true"  [p-hide-columns-manager]="true">
 
         <ng-template p-table-cell-template let-column="column" let-row="row">
           <po-button style="margin: 0 4px;" p-label="add" (p-click)="addCandidatura(row)"> </po-button>

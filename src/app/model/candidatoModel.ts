@@ -1,3 +1,4 @@
+import { VagaModel } from "./vagaModel";
 
 export class CandidatoModel {
 
@@ -10,6 +11,7 @@ export class CandidatoModel {
   dataCadastro?: Date;
   isAtivo?: boolean;
   statusDescricao?:string;
-
+  Candidatura?:CandidatoModel;
+  Vaga?:VagaModel;
 
 }

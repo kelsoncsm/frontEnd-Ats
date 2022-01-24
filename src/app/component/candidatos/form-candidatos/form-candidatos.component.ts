@@ -1,4 +1,4 @@
-import { VagaService } from 'src/app/services/vaga.services';
+import { VagaService } from './../../../services/vaga.services';
 import { CandidatoService } from './../../../services/candidato.services';
 
 import { Component, OnInit } from '@angular/core';
@@ -6,12 +6,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import {
   PoDynamicFormField,
-  PoDynamicFormFieldChanged,
-  PoDynamicFormValidation,
   PoNotificationService,
   PoPageAction,
-  PoRadioGroupOption,
-  PoSelectOption,
   PoTableColumn,
 } from '@po-ui/ng-components';
 import { CandidatoModel } from 'src/app/model/candidatoModel';
@@ -27,7 +23,9 @@ import { CandidadaturaService } from 'src/app/services/candidatura.services';
 })
 export class FormCandidatosComponent implements OnInit {
   candidato: CandidatoModel = {};
+
   habilitaVagas: boolean = false;
+
   validateFields: Array<string> = [
     'nome',
     'dataNascimento',
@@ -35,18 +33,46 @@ export class FormCandidatosComponent implements OnInit {
     'cpf',
   ];
 
-
   pageActions: Array<PoPageAction> = [];
-  candidaturasAtivas: Array<CandidaturaModel> = [];
+  candidaturasAtivas: Array<VagaModel> = [];
   candidaturasMinhas: Array<CandidaturaModel> = [];
 
   colums: Array<PoTableColumn> = [
-    { property: '', width:"190px", label: '', type:'cellTemplate'},
-    { property: 'id', label: 'Id', visible:false},
+    { property: '', width: '190px', label: '', type: 'cellTemplate' },
+    { property: 'id', label: 'Id', visible: false },
     { property: 'descricao', label: 'Descrição' },
     { property: 'requisitos', label: 'Requisitos' },
-    { property: 'dataInicio', label: 'Data Inicio' , type:'date',format:'dd/MM/YYYY' },
-    { property: 'dataFim', label: 'Data Fim' , type:'date',format:'dd/MM/YYYY'  }
+    {
+      property: 'dataInicio',
+      label: 'Data Inicio',
+      type: 'date',
+      format: 'dd/MM/YYYY',
+    },
+    {
+      property: 'dataFim',
+      label: 'Data Fim',
+      type: 'date',
+      format: 'dd/MM/YYYY',
+    },
+  ];
+
+  columsVaga: Array<PoTableColumn> = [
+    { property: '', width: '190px', label: '', type: 'cellTemplate' },
+    { property: 'id', label: 'Id', visible: false },
+    { property: 'descricao', label: 'Descrição' },
+    { property: 'requisitos', label: 'Requisitos' },
+    {
+      property: 'dataInicio',
+      label: 'Data Inicio',
+      type: 'date',
+      format: 'dd/MM/YYYY',
+    },
+    {
+      property: 'dataFim',
+      label: 'Data Fim',
+      type: 'date',
+      format: 'dd/MM/YYYY',
+    },
   ];
 
   constructor(
@@ -54,31 +80,27 @@ export class FormCandidatosComponent implements OnInit {
     private candidatoService: CandidatoService,
     private router: Router,
     public poNotification: PoNotificationService,
-    private candidaturaService : CandidadaturaService
+    private candidaturaService: CandidadaturaService,
+    private vagaService: VagaService
   ) {}
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
 
     if (id != '0') {
+      this.habilitaVagas = true;
       this.candidatoService.readById(id).subscribe((data) => {
         data.dataCadastro = Util.FormataData(data.dataCadastro);
         this.candidato = data;
-        this.habilitaVagas = true;
       });
 
-
-      this.candidaturaService.getLista().subscribe((data) => {
-
+      this.vagaService.getVagasNaoAssociadas(id).subscribe((data) => {
         this.candidaturasAtivas = data;
       });
 
       this.candidaturaService.getListaVagasCandidatos(id).subscribe((data) => {
-
         this.candidaturasMinhas = data;
       });
-
-
     }
   }
 
@@ -94,25 +116,32 @@ export class FormCandidatosComponent implements OnInit {
     }
   }
 
-
-  removeCandidatura(model:any){
-
+  removeCandidatura(model: any) {
     this.candidaturaService.update(model).subscribe(() => {
-     window.location.reload();
+      window.location.reload();
     });
-
   }
 
+  candidatoModel: CandidatoModel = {};
+  addCandidatura(model: any) {
 
-  addCandidatura(model:any){
+   var id =  this.route.snapshot.paramMap.get('id') || '';
 
-    this.candidaturaService.save(model).subscribe(() => {
-     window.location.reload();
+    this.candidatoModel = {
+      Candidatura: {
+        id: parseInt(id),
+      },
+      Vaga: {
+        id: model.id,
+      },
+      isAtivo: true,
+      id: parseInt('0'),
+    };
+
+    this.candidaturaService.save(this.candidatoModel).subscribe(() => {
+      window.location.reload();
     });
-
   }
-
-
 
   fields: Array<PoDynamicFormField> = [
     {
@@ -172,5 +201,4 @@ export class FormCandidatosComponent implements OnInit {
       rows: 5,
     },
   ];
-
 }
